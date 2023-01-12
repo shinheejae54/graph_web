@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>외식산업동향지수</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!--chart.js 2.4.0버전 활용을 다운로드 안하고 사용하기위해서 사용-->
+</head>
+<body>
+    <h1>외식 산업동향지수</h1>
+    <p>외식산업경기전망지수(KRBI)는 매출액, 고객수, 종업원수 등
+         외식산업의 성장과 위축의 정도에 따라 종사자들의 판단, 
+         예측의 변화 추이를 측정하여 산업경기동향을 분기별로 보여주는 체감지표</p>
+
+    <div style="width: 1800px; height: 900px;">
+        <!--div로 공간 나눠 주고 공간  사이즈 설정하기 -->
+        <canvas id="myChart"></canvas>
+        <!--cnavas로 그래프를 가져오기위해서 사용-->
+    </div>
+    
+    <script type="text/javascript">
+        //타입을 자바스크립트로 만들어줌
+    var context = document
+                .getElementById('myChart')
+                .getContext('2d');
+                //변수로  선언한 mychart를받아준다 2d로 canvrs에 랜더링할것을 선언
+            var myChart = new Chart(context, {
+                type: 'line',
+//그래프 타입
+                data: {
+                    labels: {{year| safe}},
+                    //라벨은 변수로 가져온 year 를 활용,safe를 사용해서 값을 렌더링 할때 자동 이스케이프를 끈다
+                    datasets: [//그래프에 들어가는 값들 
+                        { 
+                            label: '전체', 
+                            fill: false,//그래프를 어떻게 채울지 False로 해서 채우지 않기 
+                            data: {{name1 | safe}},
+                            backgroundColor:'rgb(153, 102, 255)',
+                            borderColor:'rgb(153, 102, 255)'
+                        },
+                        { 
+                            label: '한식', 
+                            fill: false,
+                            data: {{name2 | safe}},
+                            backgroundColor:'rgb(255, 99, 132)',
+                            borderColor:'rgb(255, 99, 132)'   
+                        },
+                        { 
+                            label: '중식', 
+                            fill: false,
+                            data: {{name3 | safe}},
+                            backgroundColor:'rgb(54, 162, 235)',
+                            borderColor:'rgb(54, 162, 235)'   
+                        },
+                        { 
+                            label: '일식', 
+                            fill: false,
+                            data: {{name4 | safe}},
+                            backgroundColor:'rgb(255, 206, 86)',
+                            borderColor:'rgb(255, 206, 86)'    
+                        },
+                        { 
+                            label: '양식', 
+                            fill: false,
+                            data: {{name5 | safe}},
+                            backgroundColor:'rgb(255, 159, 64)',
+                            borderColor:'rgb(255, 159, 64)'   
+                        },
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [//y축에 대한 옵션 
+                            {
+                                ticks: {
+                                    min: 50,
+						            max : 100,
+						            fontSize : 14,
+                                }
+                            }
+                        ]
+                    }
+                }
+            });
+    </script>
+    
+</body>
+</html>
